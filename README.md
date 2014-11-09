@@ -40,6 +40,40 @@ func main() {
 }
 ```
 
+Or without [Negroni](https://github.com/codegangsta/negroni) and only for one
+handler:
+
+```go
+package main
+
+import (
+  "github.com/K-Phoen/http-auth/auth"
+  "log"
+  "net/http"
+)
+
+func hello_action(w http.ResponseWriter, req *http.Request) {
+  w.Write([]byte("Hello!"))
+}
+
+func main() {
+  mux := http.NewServeMux()
+
+  basicAuth := auth.BasicAuth(&auth.AuthOptions{
+    Realm: "Restricted",
+    AuthenticationMethod: func(login, password string) bool {
+      return login == "test" && password == "toto"
+    },
+  })
+
+  mux.Handle("/hello", basicAuth.Wrap(hello_action))
+
+  log.Println("Listening...")
+  http.ListenAndServe(":3000", mux)
+}
+```
+
+
 ## ToDo
 
   * write tests
