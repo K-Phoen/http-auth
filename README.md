@@ -29,7 +29,7 @@ func main() {
   authOptions := &AuthOptions{
     Realm: "Restricted",
     AuthenticationMethod: func(login, password string) bool {
-      return login == "test" && password == "tata"
+      return auth.SecureCompare(login, "test") && auth.SecureCompare(password, "tata")
     },
   }
 
@@ -62,7 +62,7 @@ func main() {
   basicAuth := auth.BasicAuth(&auth.AuthOptions{
     Realm: "Restricted",
     AuthenticationMethod: func(login, password string) bool {
-      return login == "test" && password == "toto"
+      return auth.SecureCompare(login, "test") && auth.SecureCompare(password, "tata")
     },
   })
 
