@@ -3,6 +3,12 @@ http-auth
 
 Authentication HTTP middleware for Go applications.
 
+## Status
+
+This project is **DEPRECATED** and should NOT be used. 
+
+If someone magically appears and wants to maintain this project, I'll gladly give access to this repository.
+
 ## Usage
 
 Here is a ready to use example with [Negroni](https://github.com/codegangsta/negroni):
